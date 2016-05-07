@@ -13,13 +13,6 @@ $(document).ready(function(){
   		$(".overlay").fadeOut(1000);
   	});
 
-  	/*--- New Game button ---*/
-
-// function newgame() {
-//     return Math.floor((Math.random() * 100) + 1);
-/*onclick run random number again
-
-
   	/*--- Pick Random Number ---*/
 
 	var randomnumber =  Math.floor((Math.random() * 100) + 1);
@@ -35,16 +28,35 @@ $(document).ready(function(){
     });
     	
 
+ 
 
-	/*--- you guessed it---*/
+  function game() {
+    var guess = parseInt($('#userGuess').val()); //.val gets value of an input field
+/*--add guess to list---*/
+    $('#guessList').append('<li>'+guess+'</li>');
 
-	function game() {
-		var guess = parseInt($('#userGuess').val()); //.val gets value of an input field
-		console.log("Yay");
-		if (guess === randomnumber) {
-	    	$('#feedback').html('Congrats! You got it!');	    
-	    }	
-	}
+// /*Increase guess counter*/
+//     function addCount(){            
+//    document.getElementById("count").innerHTML=
+//         parseInt(document.getElementById("score").innerHTML,10)+1;
+// }
+
+
+/*--- you guessed it---*/
+    if (guess === randomnumber) {
+        $('#feedback').html('Congrats! You got it!');     
+      } 
+  }
+
+
+
+    /*--- New Game button ---*/
+
+    $(".new").click(function(){
+      randomnumber=Math.floor((Math.random() * 100) + 1);;
+      console.log("The secret number is: " + randomnumber);
+    });
+
 
 
 });
