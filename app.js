@@ -66,6 +66,10 @@ $(document).ready(function(){
       if (Math.abs(guess - randomnumber)>=90 && Math.abs(guess - randomnumber)<100){
         $('#feedback').html('Freezing');
       }
+      if(guess < 0 || guess > 101){
+        alert('Please choose a number between zero and 100.');
+        return true;
+      }
   }
 
 
@@ -77,10 +81,6 @@ $(document).ready(function(){
     }   
    // document.getElementById("count").innerHTML=
    //      parseInt(document.getElementById("count").innerHTML)+1;
-
-
-
-
 
 
 
