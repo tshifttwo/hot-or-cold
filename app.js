@@ -20,12 +20,13 @@ $(document).ready(function(){
 
 
 	/*--- Get Guess---*/
-
+    var value; 
 
     $("#form").on("submit", function(e){
     	e.preventDefault();
-    	game();
       addCount();
+    	game();
+      
     });
 
 
@@ -75,9 +76,10 @@ $(document).ready(function(){
 
 /*Increase guess counter*/
     function addCount(){      
-        var value = parseInt(document.getElementById('count').value, 10);
-        value++;
-        document.getElementById('count').value = value;    
+       value =parseInt($('#count').html());
+       value++;
+       $('#count').html(value);
+       console.log(value);
     }   
    // document.getElementById("count").innerHTML=
    //      parseInt(document.getElementById("count").innerHTML)+1;
