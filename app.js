@@ -34,7 +34,7 @@ $(document).ready(function(){
     var guess = parseInt($('#userGuess').val()); //.val gets value of an input field
 
 /*--add guess to list---*/
-      $('#guessList').append('<li>'+guess+'</li>');
+      $('#guessList').append('<li class="pastguesses">'+guess+'</li>');
 
 /*--- you guessed it---*/
       if (guess === randomnumber) {
@@ -71,6 +71,19 @@ $(document).ready(function(){
         alert('Please choose a number between zero and 100.');
         return true;
       }
+      var pastGuesses = $('.pastguesses');
+
+      $.each(pastGuesses, function(index, element) {
+
+        var pastguessval=(parseInt($(element).html()));
+
+        if(guess ===pastguessval){
+        alert('You\'ve already guessed this number');
+      }
+        //compare that value to your current guess value
+
+      });
+      
   }
 
 
@@ -79,11 +92,8 @@ $(document).ready(function(){
        value =parseInt($('#count').html());
        value++;
        $('#count').html(value);
-       console.log(value);
     }   
-   // document.getElementById("count").innerHTML=
-   //      parseInt(document.getElementById("count").innerHTML)+1;
-
+  
 
 
     /*--- New Game button ---*/
