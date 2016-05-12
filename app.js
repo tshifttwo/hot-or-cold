@@ -1,44 +1,77 @@
-
 $(document).ready(function(){
 
-	
-	/*--- Display information modal box ---*/
-  	$(".what").click(function(){
-    	$(".overlay").fadeIn(1000);
+  
+  /*--- Display information modal box ---*/
+    $(".what").click(function(){
+      $(".overlay").fadeIn(1000);
 
-  	});
+    });
 
-  	/*--- Hide information modal box ---*/
-  	$("a.close").click(function(){
-  		$(".overlay").fadeOut(1000);
-  	});
+    /*--- Hide information modal box ---*/
+    $("a.close").click(function(){
+      $(".overlay").fadeOut(1000);
+    });
 
-  	/*--- Pick Random Number ---*/
+    /*--- Pick Random Number ---*/
 
-	var randomnumber =  Math.floor((Math.random() * 100) + 1);
+  var randomnumber =  Math.floor((Math.random() * 100) + 1);
     console.log("The secret number is: " + randomnumber);
 
 
-	/*--- Get Guess---*/
+  /*--- Get Guess---*/
     var value; 
 
     $("#form").on("submit", function(e){
-    	e.preventDefault();
+      e.preventDefault();
+      form.reset 
+      game();
       addCount();
-    	game();
-      
+
     });
 
 
+
+
   function game() {
-    var guess = parseInt($('#userGuess').val()); //.val gets value of an input field
+    var guess = parseInt($('#userGuess').val());
 
-/*--add guess to list---*/
-      $('#guessList').append('<li class="pastguesses">'+guess+'</li>');
+      if (isunder100(guess) && isnew(guess)){
+        temperature(guess, randomnumber);
+        addtopast(guess);
+      }
+  }
 
+  function isunder100(guess){
+      
+
+      if(guess < 0 || guess > 101){
+        alert('Please choose a number between 0 and 100.');
+        return false;
+      }else{
+        return true
+       } 
+   }
+
+  function isnew(guess){
+       var pastGuesses = $('.pastguesses');
+   
+    $.each(pastGuesses, function(index, element) {
+        var pastguessval=(parseInt($(element).html()));
+        console.log(pastguessval)
+
+        if(guess ===pastguessval){
+          alert('You\'ve already guessed this number');
+          return false;
+        }else{
+          return true;
+        }
+    });
+  }
 /*--- you guessed it---*/
+      
+  function temperature(guess, randomnumber){
       if (guess === randomnumber) {
-          $('#feedback').html('Congrats! You got it!');     
+        $('#feedback').html('Congrats! You got it!');     
       } 
       if (Math.abs(guess - randomnumber)<5){
         $('#feedback').html('On Fire!');
@@ -67,25 +100,12 @@ $(document).ready(function(){
       if (Math.abs(guess - randomnumber)>=90 && Math.abs(guess - randomnumber)<100){
         $('#feedback').html('Freezing');
       }
-      if(guess < 0 || guess > 101){
-        alert('Please choose a number between zero and 100.');
-        return true;
-      }
-      var pastGuesses = $('.pastguesses');
-
-      $.each(pastGuesses, function(index, element) {
-
-        var pastguessval=(parseInt($(element).html()));
-
-        if(guess ===pastguessval){
-        alert('You\'ve already guessed this number');
-      }
-        //compare that value to your current guess value
-
-      });
-      
+    
   }
 
+    function addtopast(guess){
+      $('#guessList').append('<li class="pastguesses">'+guess+'</li>');
+    }
 
 /*Increase guess counter*/
     function addCount(){      
@@ -101,10 +121,10 @@ $(document).ready(function(){
     $(".new").click(function(){
       randomnumber=Math.floor((Math.random() * 100) + 1);;
       console.log("The secret number is: " + randomnumber);
+      $(".pastguesses").remove();
     });
 
 
 
 });
-
 
