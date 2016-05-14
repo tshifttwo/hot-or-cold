@@ -25,7 +25,6 @@ $(document).ready(function(){
       e.preventDefault();
       form.reset 
       game();
-      addCount();
 
     });
 
@@ -37,7 +36,8 @@ $(document).ready(function(){
 
       if (isunder100(guess) && isnew(guess)){
         temperature(guess, randomnumber);
-        addtopast(guess);
+        addtopast(guess); 
+        addCount(value);
       }
   }
 
@@ -54,10 +54,8 @@ $(document).ready(function(){
 
   function isnew(guess){
        var pastGuesses = $('.pastguesses');
-   
-    $.each(pastGuesses, function(index, element) {
-        var pastguessval=(parseInt($(element).html()));
-        console.log(pastguessval)
+       var pastguessval= parseInt($('li.pastguesses').html());
+  
 
         if(guess ===pastguessval){
           alert('You\'ve already guessed this number');
@@ -65,8 +63,15 @@ $(document).ready(function(){
         }else{
           return true;
         }
-    });
-  }
+    }
+
+  // function isnumber(){
+  //    if (guess isnan()){
+  //     return false
+  //    }else{
+  //     return true;
+  //    }
+
 /*--- you guessed it---*/
       
   function temperature(guess, randomnumber){
@@ -103,8 +108,11 @@ $(document).ready(function(){
     
   }
 
+/*Track Guesses*/
+
     function addtopast(guess){
       $('#guessList').append('<li class="pastguesses">'+guess+'</li>');
+      
     }
 
 /*Increase guess counter*/
