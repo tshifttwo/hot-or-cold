@@ -21,11 +21,11 @@ $(document).ready(function(){
   /*--- Get Guess---*/
     var value; 
 
+
     $("#form").on("submit", function(e){
       e.preventDefault();
-      form.reset 
       game();
-
+      $("#form").reset
     });
 
 
@@ -38,7 +38,7 @@ $(document).ready(function(){
         temperature(guess, randomnumber);
         addtopast(guess); 
         addCount(value);
-      }
+      } 
   }
 
   function isunder100(guess){
@@ -65,20 +65,13 @@ $(document).ready(function(){
         }
     }
 
-  // function isnumber(){
-  //    if (guess isnan()){
-  //     return false
-  //    }else{
-  //     return true;
-  //    }
-
 /*--- you guessed it---*/
       
   function temperature(guess, randomnumber){
       if (guess === randomnumber) {
         $('#feedback').html('Congrats! You got it!');     
       } 
-      if (Math.abs(guess - randomnumber)<5){
+      if (Math.abs(guess - randomnumber)<5 && Math.abs(guess - randomnumber)>0){
         $('#feedback').html('On Fire!');
       }
       if (Math.abs(guess - randomnumber)>=5 && Math.abs(guess - randomnumber)<20){
@@ -112,7 +105,6 @@ $(document).ready(function(){
 
     function addtopast(guess){
       $('#guessList').append('<li class="pastguesses">'+guess+'</li>');
-      
     }
 
 /*Increase guess counter*/
